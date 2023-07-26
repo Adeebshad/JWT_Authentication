@@ -43,8 +43,14 @@ namespace SimpleJWT.Controllers
                         new Claim(JwtRegisteredClaimNames.Email, urs1.Username),
                         new Claim(ClaimTypes.Role,urs1.Role)
                     });
+                    // Get the current local date and time
+                    DateTime currentDateTime = DateTime.Now;
 
-                    var expires = DateTime.UtcNow.AddMinutes(10);
+                    // Display the current date and time
+                    Console.WriteLine("Current date and time: " + currentDateTime);
+
+                    var expires = DateTime.Now.AddMinutes(1);
+                    Console.WriteLine("expires date and time: " + expires);
 
                     var tokenDescriptor = new SecurityTokenDescriptor
                     {
@@ -53,6 +59,7 @@ namespace SimpleJWT.Controllers
                         Issuer = issuer,
                         Audience = audience,
                         SigningCredentials = signingCredentials
+                        
                     };
 
                     var tokenHandler = new JwtSecurityTokenHandler();
